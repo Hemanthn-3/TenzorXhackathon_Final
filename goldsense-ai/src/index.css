@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Frozen Light Edition Color Scheme */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #0f1524;
+  --bg-card: #141c2e;
+  --accent-gold: #7dd3fc;
+  --accent-gold-light: #c8a0f0;
+  --accent-gold-dim: #0e4d6e;
+  --text-primary: #e0e8f0;
+  --text-secondary: #88b4cc;
+  --text-muted: #4a6070;
+  --success: #4CAF7A;
+  --warning: #E8A84C;
+  --danger: #ff6b6b;
+  --border: rgba(125, 211, 252, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  background-color: var(--bg-primary);
+  /* Added Frozen Light background effects */
+  background-image: 
+    radial-gradient(rgba(125, 211, 252, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at center, #0d1c36 0%, var(--bg-primary) 100%);
+  background-size: 32px 32px, 200% 200%;
+  background-attachment: fixed;
+  animation: bgShift 20s ease infinite;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+h1, h2, h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+h2 {
+  font-size: clamp(20px, 3vw, 32px);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.screen {
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px;
+  animation: fadeIn 300ms ease forwards;
+  width: 100%;
+}
+
+.card {
+  /* Updated to use premium Glassmorphism panel */
+  background: rgba(15, 21, 36, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(125, 211, 252, 0.1);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+  .screen { padding: 16px; }
+  .card { padding: 16px; border-radius: 16px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .screen {
+    max-width: 680px;
+    padding: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .screen {
+    max-width: 1100px;
+    padding: 48px;
+  }
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .capture-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .result-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .analysing-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+}
+
+.gold-gradient {
+  /* Adapted gradient to ice-blue/lavender */
+  background: linear-gradient(135deg, #7dd3fc 0%, #c8a0f0 100%);
+  color: #001f2e !important;
+}
+
+.gold-text {
+  /* Adapted text gradient */
+  background: linear-gradient(135deg, #7dd3fc 0%, #c8a0f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1);    opacity: 0.8; }
+  100% { transform: scale(1.5);  opacity: 0; }
+}
+
+input, select {
+  font-size: 16px !important; /* Prevent iOS zoom */
+}
+
+input:focus, select:focus {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 0 2px rgba(125, 211, 252, 0.2);
+  outline: none;
+}
+
+input::placeholder { color: var(--text-muted); }
+
+/* Touch Improvements */
+button, input, select, .touch-target {
+  min-height: 44px;
+}
+
+/* Global button polish */
+button {
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+button:not(:disabled):hover  { opacity: 0.9; }
+button:not(:disabled):active { transform: scale(0.97); }
+button:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
+button:disabled { cursor: not-allowed; opacity: 0.5; }
+
+/* Dark theme select options */
+select option { background: var(--bg-card); color: var(--text-primary); }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
